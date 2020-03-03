@@ -6,8 +6,10 @@ router.get('/', (req, res)=> {
     res.send("Hello there")
 });
 
-router.post('/', (req, res)=> {
-    res.send("What is your name?")
+router.post('/', async (req, res)=> {
+    const {error} = validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+
 })
 
 module.exports = router 
